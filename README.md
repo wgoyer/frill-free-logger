@@ -73,7 +73,7 @@ Nope.
 Right. Because your use of a module someone else wrote hinges on whether or not the tests, they also wrote, pass.
 
 ### Contributing
-- [https://raw.githubusercontent.com/wgoyer/frill-free-logger/master/Logger.js](Click here)
+- [Click here](https://raw.githubusercontent.com/wgoyer/frill-free-logger/master/Logger.js)
 - Copy the entire contents of this file and paste it into an editor of your choice.
 - Make whatever changes you would like.
 - Push it to your own repository.
