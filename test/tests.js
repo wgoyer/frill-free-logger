@@ -38,4 +38,19 @@ describe('Log output', () => {
       sinon.assert.calledWith(log, sinon.match('\tnot even json'))
     })
   })
+  describe('zero settings', () => {
+    let lumberJill = new Logger()
+    it('INFO log format', () => {
+      lumberJill.logInfo('Excellent')
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[INFO\] {4}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - Excellent$/))
+    })
+    it('WARNING log format', () => {
+      lumberJill.logWarning('Not so good')
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[WARNING\] \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - Not so good$/))
+    })
+    it('ERROR log format', () => {
+      lumberJill.logError('turrible')
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[ERROR\] {3}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - turrible$/))
+    })
+  })
 })
