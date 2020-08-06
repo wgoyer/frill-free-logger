@@ -1,3 +1,3 @@
 const Logger = require('./Logger')
 
-exports.Logger = Logger
+exports = Logger
