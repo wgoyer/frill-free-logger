@@ -2,16 +2,11 @@ let fs = require('fs')
 
 class Logger {
   constructor(settings = {}) {
-    this.name = false
-    this.fileName = false
-    this.stdout = false
-    if (settings) {
-      this.name = settings.name || false
-      this.fileName = settings.fileName || false
-      this.stdout = settings.stdout || true
-      if (this.fileName) {
-        this.fileStream = fs.createWriteStream(this.fileName, {flags: 'a'})
-      }
+    this.name = settings.name || false
+    this.fileName = settings.fileName || false
+    this.stdout = settings.stdout || true
+    if (this.fileName) {
+      this.fileStream = fs.createWriteStream(this.fileName, {flags: 'a'})
     }
   }
   logError(message, data) {
