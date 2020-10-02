@@ -57,7 +57,7 @@ function handleJson(data) {
   let processedData = ''
   // Try to prettify any JSON passed in
   if (typeof data == 'object') {
-    processedData = indentJson(JSON.stringify(data, null, 2))
+    processedData = indentJson(JSON.stringify(data, objectifyError, 2))
   } else {
     // If data is a string, see if it's stringified json and prettify it
     try {
@@ -69,8 +69,23 @@ function handleJson(data) {
   return processedData
 }
 
+// This creates an object from an error that can be stringified.
+// If it's not an error, return original value. Stack overflow FTW.
+function objectifyError(key, value) {
+  if (value instanceof Error) {
+    let error = {}
+    Object.getOwnPropertyNames(value).forEach((key) => {
+      error[key] = value[key]
+    })
+    return error
+  }
+  return value
+}
+
 function indentJson(jsonString) {
   let splitIndented = []
+  // Stringification escapes new line characters. We set them back so stack traces are legible
+  jsonString = jsonString.split('\\n').join('\n')
   jsonString.split('\n').forEach((line) => { splitIndented.push(`\t${line}`) })
   return splitIndented.join('\n')
 }
