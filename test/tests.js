@@ -37,6 +37,11 @@ describe('Log output', () => {
       lumberJack.logInfo('z', 'not even json')
       sinon.assert.calledWith(log, sinon.match('\tnot even json'))
     })
+    it('will objectify, stringify and prettify an error object', () => {
+      lumberJack.logError('err', new Error('I have made a huge mistake'))
+      const lineCount = log.getCall(0).firstArg.split('\n').length
+      assert(lineCount > 6, `Expected there to be more than 6 lines in the log output, but there were only ${lineCount}`)
+    })
   })
   describe('zero settings', () => {
     let lumberJill = new Logger()
