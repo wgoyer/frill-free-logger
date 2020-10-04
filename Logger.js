@@ -21,6 +21,15 @@ class Logger {
     const msg = buildMessage(this.name, 'INFO', message, data)
     printMessage(msg, this.stdout, this.fileStream)
   }
+  error(message, data) {
+    this.logError(message, data)
+  }
+  warning(message, data) {
+    this.logWarning(message, data)
+  }
+  info(message, data) {
+    this.logInfo(message, data)
+  }
 }
 
 function getTimeStamp() {

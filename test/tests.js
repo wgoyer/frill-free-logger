@@ -10,19 +10,37 @@ describe('Log output', () => {
     log = sinon.spy(console, 'log')
   })
   describe('log types', () => {
+    const supRegex = new RegExp(/^\[INFO\] {4}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - Sup$/)
+    const woildRegex = new RegExp(/^\[WARNING\] \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - what a woild$/)
+    const kapowRegex = new RegExp(/^\[ERROR\] {3}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - kapow$/)
     it('INFO log format', () => {
       lumberJack.logInfo('Sup')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[INFO\] {4}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - Sup$/))
+      sinon.assert.calledWithExactly(log, sinon.match(supRegex))
     })
     it('WARNING log format', () => {
       lumberJack.logWarning('what a woild')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[WARNING\] \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - what a woild$/))
+      sinon.assert.calledWithExactly(log, sinon.match(woildRegex))
     })
     it('ERROR log format', () => {
       lumberJack.logError('kapow')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[ERROR\] {3}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - kapow$/))
+      sinon.assert.calledWithExactly(log, sinon.match(kapowRegex))
+    })
+    describe('log types aliases', () => {
+      it('INFO log format', () => {
+        lumberJack.info('Sup')
+        sinon.assert.calledWithExactly(log, sinon.match(supRegex))
+      })
+      it('WARNING log format', () => {
+        lumberJack.warning('what a woild')
+        sinon.assert.calledWithExactly(log, sinon.match(woildRegex))
+      })
+      it('ERROR log format', () => {
+        lumberJack.error('kapow')
+        sinon.assert.calledWithExactly(log, sinon.match(kapowRegex))
+      })
     })
   })
+
   describe('Log JSON', () => {
     const prettyJSON = '\t{\n\t  "pretty": "json"\n\t}'
     it('will log prettified JSON from object', () => {
