@@ -3,12 +3,12 @@ If you're looking for the best logging mechanism created for nodejs, you should 
 
 Do you want your log messages to look like this?
 ```
-[INFO]    HTTPRequests 2020:08:05 18:41:40 - what a woild
+[INFO]    2020:08:05 18:41:40 HTTPRequests - what a woild
   {
     "data": "this would be some important data, or not, I'm not the data police"
   }
-[WARNING] HTTPRequests 2020:08:05 18:41:40 - what a woild
-[ERROR]   HTTPRequests 2020:08:05 18:41:40 - what a woild
+[WARNING] 2020:08:05 18:41:40 HTTPRequests - what a woild
+[ERROR]   2020:08:05 18:41:40 HTTPRequests - what a woild
 ```
 Then here's how to use this thing:
 
@@ -24,7 +24,7 @@ const logSettings = {
 Using the logger works like this:
 
 ```
-let FFL = require('frill-free-logger')
+let FFL = require('@orphaneater/frill-free-logger')
 const logSettings = { // .. see above }
 httpLog = new FFL(logSettings)
 
@@ -41,14 +41,14 @@ makeARequest(someUrl).then((jsonBody) => {
 ```
 And would output similar to this if each scenario were hit:
 ```
-[INFO]    HTTPRequests 2020:08:05 18:40:40 - Making request to https://example.com
-[INFO]    HTTPRequests 2020:08:05 18:40:42 - Received HTTP response from https://example.com
+[INFO]    2020:08:05 18:40:40 HTTPRequests - Making request to https://example.com
+[INFO]    2020:08:05 18:40:42 HTTPRequests - Received HTTP response from https://example.com
   {
     "accountBalance": -31,
     "deadBeat": true
   }
-[WARNING] HTTPRequests 2020:08:05 18:40:43 - Does the -31 include the money you owe me?
-[ERROR]   HTTPRequests 2020:08:05 18:40:46 - Damn. https://example.com responded with an error
+[WARNING] 2020:08:05 18:40:43 HTTPRequests - Does the -31 include the money you owe me?
+[ERROR]   2020:08:05 18:40:46 HTTPRequests - Damn. https://example.com responded with an error
   {
     "type": "Failure",
     "msg": "An error has occurred",

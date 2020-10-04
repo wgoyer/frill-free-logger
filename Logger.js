@@ -21,6 +21,15 @@ class Logger {
     const msg = buildMessage(this.name, 'INFO', message, data)
     printMessage(msg, this.stdout, this.fileStream)
   }
+  error(message, data) {
+    this.logError(message, data)
+  }
+  warning(message, data) {
+    this.logWarning(message, data)
+  }
+  info(message, data) {
+    this.logInfo(message, data)
+  }
 }
 
 function getTimeStamp() {
@@ -41,11 +50,13 @@ function getTimeStamp() {
 }
 
 function buildMessage(logName, level, message, data) {
-  formattedLevel = `[${level}]`.padEnd(9) // length of "WARNING" plus brackets
+  const formattedLevel = `[${level}]`.padEnd(9) // length of "WARNING" plus brackets
+  const baseMessage = `${formattedLevel} ${getTimeStamp()}`
+
   if (logName) {
-    logMessage = `${formattedLevel} ${logName} ${getTimeStamp()} - ${message}`
+    logMessage = `${baseMessage} ${logName} - ${message}`
   } else {
-    logMessage = `${formattedLevel} ${getTimeStamp()} - ${message}`
+    logMessage = `${baseMessage} - ${message}`
   }
   if (data) {
     logMessage = `${logMessage}\n${handleJson(data)}`
