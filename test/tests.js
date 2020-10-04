@@ -12,15 +12,15 @@ describe('Log output', () => {
   describe('log types', () => {
     it('INFO log format', () => {
       lumberJack.logInfo('Sup')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[INFO\] {4}lumberJack \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - Sup$/))
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[INFO\] {4}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - Sup$/))
     })
     it('WARNING log format', () => {
       lumberJack.logWarning('what a woild')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[WARNING\] lumberJack \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - what a woild$/))
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[WARNING\] \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - what a woild$/))
     })
     it('ERROR log format', () => {
       lumberJack.logError('kapow')
-      sinon.assert.calledWithExactly(log, sinon.match(/^\[ERROR\] {3}lumberJack \d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} - kapow$/))
+      sinon.assert.calledWithExactly(log, sinon.match(/^\[ERROR\] {3}\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2} lumberJack - kapow$/))
     })
   })
   describe('Log JSON', () => {
